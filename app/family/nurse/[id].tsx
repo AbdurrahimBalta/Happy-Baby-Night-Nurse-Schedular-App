@@ -9,32 +9,19 @@ export default function NurseProfileScreen() {
   const { id } = useLocalSearchParams();
   const [message, setMessage] = useState('');
 
-  // Mock nurse data - in a real app, this would come from an API
+  // TODO: Fetch nurse data from Supabase based on ID
   const nurse = {
     id,
-    name: 'Angela Davis',
-    picture: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-    rating: 4.9,
-    experience: '10+ years',
-    bio: 'Experienced night nurse specializing in newborn care and sleep training. Certified in infant CPR and sleep consulting.',
-    certifications: ['RN', 'CPR Certified', 'Sleep Training Specialist', 'Newborn Care Specialist'],
-    specialties: ['Sleep Training', 'Twins Care', 'Premature Babies', 'Breastfeeding Support'],
-    onShiftToday: true, // This would be determined by checking current date against scheduled shifts
-    nextShift: 'Tonight at 8:00 PM',
-    messages: [
-      {
-        id: 1,
-        sender: 'nurse',
-        text: "I've reviewed Emma and Liam's sleep schedule for tonight.",
-        time: '7:55 PM'
-      },
-      {
-        id: 2,
-        sender: 'family',
-        text: "Great! Emma might need an extra feeding around 2 AM.",
-        time: '7:56 PM'
-      }
-    ]
+    name: 'Nurse not found',
+    picture: '',
+    rating: 0,
+    experience: '',
+    bio: 'Nurse data will be loaded from database.',
+    certifications: [],
+    specialties: [],
+    onShiftToday: false,
+    nextShift: '',
+    messages: []
   };
 
   const handleSend = () => {

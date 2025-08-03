@@ -19,74 +19,8 @@ export default function MyScheduleScreen() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  // Mock shifts data with various statuses
-  const shifts: Shift[] = [
-    {
-      id: '1',
-      date: '2024-03-15',
-      startTime: '8:00 PM',
-      endTime: '6:00 AM',
-      nurseName: 'Angela Davis',
-      status: 'confirmed',
-      recurring: true
-    },
-    {
-      id: '2',
-      date: '2024-03-16',
-      startTime: '9:00 PM',
-      endTime: '7:00 AM',
-      nurseName: 'Michael Chen',
-      status: 'pending'
-    },
-    {
-      id: '3',
-      date: '2024-03-17',
-      startTime: '8:30 PM',
-      endTime: '6:30 AM',
-      nurseName: 'Sophia Rodriguez',
-      status: 'confirmed'
-    },
-    {
-      id: '4',
-      date: '2024-03-18',
-      startTime: '8:00 PM',
-      endTime: '6:00 AM',
-      nurseName: 'James Wilson',
-      status: 'cancelled'
-    },
-    {
-      id: '5',
-      date: '2024-03-19',
-      startTime: '9:00 PM',
-      endTime: '7:00 AM',
-      nurseName: 'Angela Davis',
-      status: 'pending'
-    },
-    {
-      id: '6',
-      date: '2024-03-20',
-      startTime: '8:30 PM',
-      endTime: '6:30 AM',
-      nurseName: 'Michael Chen',
-      status: 'confirmed'
-    },
-    {
-      id: '7',
-      date: '2024-03-21',
-      startTime: '8:00 PM',
-      endTime: '6:00 AM',
-      nurseName: 'Sophia Rodriguez',
-      status: 'cancelled'
-    },
-    {
-      id: '8',
-      date: '2024-03-22',
-      startTime: '9:00 PM',
-      endTime: '7:00 AM',
-      nurseName: 'James Wilson',
-      status: 'pending'
-    }
-  ];
+  // TODO: Fetch shifts data from Supabase
+  const shifts: Shift[] = [];
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
@@ -186,7 +120,7 @@ export default function MyScheduleScreen() {
     }, {} as Record<string, number>);
 
     // Create dots for each status type
-    const dots = [];
+    const dots: React.ReactNode[] = [];
     let dotIndex = 0;
 
     // Order: confirmed (green), pending (yellow), cancelled (red)

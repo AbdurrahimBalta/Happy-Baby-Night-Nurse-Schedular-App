@@ -9,8 +9,8 @@ import { useAuth } from '@/context/AuthContext';
 export default function AdminHomeScreen() {
   const { user } = useAuth();
 
-  // Mock admin profile data - in a real app this would come from your profile context/API
-  const adminName = 'Katelynn'; // This would be fetched from the admin profile
+  // TODO: Fetch admin profile data from Supabase
+  const adminName = user?.email?.split('@')[0] || 'Admin'; // Temporary fallback
 
   const menuItems = [
     {

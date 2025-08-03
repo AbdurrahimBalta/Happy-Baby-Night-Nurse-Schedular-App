@@ -13,22 +13,8 @@ export default function NurseHomeScreen() {
   const [isClockedIn, setIsClockedIn] = useState(false);
   const [shiftStartTime, setShiftStartTime] = useState<Date | null>(null);
 
-  const [notifications] = useState([
-    {
-      id: '1',
-      type: 'urgent',
-      title: 'Upcoming Shift Reminder',
-      message: 'You have a shift with the Smith Family tonight at 8:00 PM',
-      time: '2 hours until shift starts'
-    },
-    {
-      id: '2',
-      type: 'reminder',
-      title: 'Shift Tomorrow',
-      message: 'Scheduled shift with Johnson Family at 9:00 PM tomorrow',
-      time: '24 hours until shift starts'
-    }
-  ]);
+  // TODO: Fetch notifications from Supabase
+  const [notifications] = useState<any[]>([]);
 
   const handleClockInOut = () => {
     if (!isClockedIn) {
@@ -40,26 +26,8 @@ export default function NurseHomeScreen() {
     }
   };
 
-  const upcomingShifts = [
-    {
-      id: '1',
-      family: 'Smith Family',
-      date: 'Tonight',
-      time: '8:00 PM - 6:00 AM',
-      location: 'San Francisco, CA',
-      babies: ['Oliver (3m)'],
-      status: 'confirmed'
-    },
-    {
-      id: '2',
-      family: 'Johnson Family',
-      date: 'Tomorrow',
-      time: '9:00 PM - 7:00 AM',
-      location: 'Palo Alto, CA',
-      babies: ['Emma (6m)', 'Liam (6m)'],
-      status: 'pending'
-    }
-  ];
+  // TODO: Fetch upcoming shifts from Supabase
+  const upcomingShifts: any[] = [];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -70,7 +38,7 @@ export default function NurseHomeScreen() {
             style={styles.logo}
             resizeMode="contain"
           />
-          <Text style={styles.welcomeText}>Welcome, {user?.name || 'Angela Davis'}</Text>
+          <Text style={styles.welcomeText}>Welcome, {user?.email || 'Nurse'}</Text>
           <Text style={styles.dateText}>
             {formatDate(currentDate)} • {formatTime(currentDate)}
           </Text>
@@ -175,11 +143,11 @@ export default function NurseHomeScreen() {
               </View>
 
               <View style={styles.babiesContainer}>
-                {shift.babies.map((baby, index) => (
+                {upcomingShifts.length > 0 && upcomingShifts[0].babies?.map((baby: string, index: number) => (
                   <View key={index} style={styles.babyBadge}>
                     <Text style={styles.babyText}>{baby}</Text>
                   </View>
-                ))}
+                )) || null}
               </View>
             </TouchableOpacity>
           ))}

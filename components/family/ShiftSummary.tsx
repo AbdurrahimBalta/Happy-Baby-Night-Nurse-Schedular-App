@@ -3,29 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import { Calendar, Clock, CreditCard } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 
-// Mock data for demonstration
-const MOCK_NURSES = {
-  '1': {
-    id: '1',
-    name: 'Angela Davis',
-    picture: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-  },
-  '2': {
-    id: '2',
-    name: 'Michael Chen',
-    picture: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=300',
-  },
-  '3': {
-    id: '3',
-    name: 'Sophia Rodriguez',
-    picture: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=300',
-  },
-  '4': {
-    id: '4',
-    name: 'James Wilson',
-    picture: 'https://images.pexels.com/photos/6749773/pexels-photo-6749773.jpeg?auto=compress&cs=tinysrgb&w=300',
-  }
-};
+// TODO: Fetch nurse data from Supabase when needed
 
 interface ShiftSummaryProps {
   date: string;
@@ -56,7 +34,8 @@ const ShiftSummary: React.FC<ShiftSummaryProps> = ({
   total,
   selectedNurseId
 }) => {
-  const selectedNurse = selectedNurseId ? MOCK_NURSES[selectedNurseId as keyof typeof MOCK_NURSES] : null;
+  // TODO: Fetch selected nurse data from Supabase based on selectedNurseId
+  const selectedNurse = null;
   
   const totalSessions = isRecurring ? recurringDays.length * recurringWeeks : 1;
   const totalCost = total * totalSessions;

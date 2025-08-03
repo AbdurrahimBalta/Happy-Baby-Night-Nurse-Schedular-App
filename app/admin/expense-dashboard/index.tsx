@@ -5,26 +5,16 @@ import { router } from 'expo-router';
 import { ChevronLeft, DollarSign, TrendingUp, FileText, ChartBar as BarChart } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 
-// Mock data for demonstration
-const MOCK_FINANCIAL_DATA = {
-  grossRevenue: 125000,
-  expenses: 75000,
-  profit: 50000,
-  monthlyData: [
-    { month: 'Jan', revenue: 10000, expenses: 6000, profit: 4000 },
-    { month: 'Feb', revenue: 12000, expenses: 7000, profit: 5000 },
-    { month: 'Mar', revenue: 15000, expenses: 9000, profit: 6000 },
-    { month: 'Apr', revenue: 13000, expenses: 8000, profit: 5000 },
-    { month: 'May', revenue: 14000, expenses: 8500, profit: 5500 },
-    { month: 'Jun', revenue: 16000, expenses: 9500, profit: 6500 },
-    { month: 'Jul', revenue: 15000, expenses: 9000, profit: 6000 },
-    { month: 'Aug', revenue: 14000, expenses: 8500, profit: 5500 },
-    { month: 'Sep', revenue: 16000, expenses: 9500, profit: 6500 }
-  ]
+// TODO: Fetch financial data from Supabase
+const EMPTY_FINANCIAL_DATA = {
+  grossRevenue: 0,
+  expenses: 0,
+  profit: 0,
+  monthlyData: []
 };
 
 export default function ExpenseDashboardScreen() {
-  const [financialData, setFinancialData] = useState(MOCK_FINANCIAL_DATA);
+  const [financialData, setFinancialData] = useState(EMPTY_FINANCIAL_DATA);
   const [selectedPeriod, setSelectedPeriod] = useState('year');
 
   const formatCurrency = (amount: number) => {

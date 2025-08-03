@@ -9,41 +9,16 @@ export default function FamilyDetailsScreen() {
   const { id } = useLocalSearchParams();
   const [message, setMessage] = useState('');
 
-  // Mock family data
+  // TODO: Fetch family data from Supabase
   const family = {
-    name: 'Smith Family',
-    address: '456 Oak Avenue, San Francisco, CA 94110',
-    babies: [
-      {
-        name: 'Oliver',
-        age: '3 months',
-        schedule: '7:30 PM - Bath time\n8:00 PM - Last feeding\n8:30 PM - Bedtime',
-        notes: 'Currently sleep training, may need extra soothing'
-      }
-    ],
-    checkInSteps: [
-      'Park in visitor spot #12',
-      'Enter through main lobby',
-      'Take elevator to 3rd floor',
-      'Unit 304 on the right',
-      'Remove shoes at entrance'
-    ]
+    name: '',
+    address: '',
+    babies: [] as Array<{name: string; age: string; schedule: string; notes: string}>,
+    checkInSteps: [] as Array<{id: string; text: string; completed: boolean}>
   };
 
-  const messages = [
-    {
-      id: 1,
-      sender: 'nurse',
-      text: "I've arrived and am following the check-in steps.",
-      time: '7:55 PM'
-    },
-    {
-      id: 2,
-      sender: 'family',
-      text: "Perfect! We'll be ready in a moment.",
-      time: '7:56 PM'
-    }
-  ];
+  // TODO: Fetch messages from Supabase
+  const messages: any[] = [];
 
   const handleSend = () => {
     if (message.trim()) {

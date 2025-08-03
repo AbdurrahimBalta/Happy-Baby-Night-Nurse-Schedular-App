@@ -6,33 +6,8 @@ import { ChevronLeft, ChevronRight, Baby } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 
 export default function FamiliesScreen() {
-  // Mock families data
-  const families = [
-    {
-      id: '1',
-      name: 'Smith Family',
-      children: ['Emma (6m)', 'Liam (6m)'],
-      activeShifts: 3,
-      nextShift: 'Tonight at 8:00 PM',
-      picture: 'https://images.pexels.com/photos/3995919/pexels-photo-3995919.jpeg?auto=compress&cs=tinysrgb&w=300'
-    },
-    {
-      id: '2',
-      name: 'Johnson Family',
-      children: ['Oliver (3m)'],
-      activeShifts: 2,
-      nextShift: 'Tomorrow at 9:00 PM',
-      picture: 'https://images.pexels.com/photos/3995902/pexels-photo-3995902.jpeg?auto=compress&cs=tinysrgb&w=300'
-    },
-    {
-      id: '3',
-      name: 'Williams Family',
-      children: ['Sophia (4m)', 'Lucas (4m)'],
-      activeShifts: 4,
-      nextShift: 'Tonight at 7:30 PM',
-      picture: 'https://images.pexels.com/photos/3995911/pexels-photo-3995911.jpeg?auto=compress&cs=tinysrgb&w=300'
-    }
-  ];
+  // TODO: Fetch families data from Supabase
+  const families: any[] = [];
 
   return (
     <SafeAreaView style={styles.container}>

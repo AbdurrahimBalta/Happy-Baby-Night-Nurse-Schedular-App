@@ -30,53 +30,15 @@ export default function AdminNightLogsScreen() {
   const [selectedFamily, setSelectedFamily] = useState<string | null>(null);
   const [selectedNurse, setSelectedNurse] = useState<string | null>(null);
 
-  // Generate mock data
+  // TODO: Fetch night logs from Supabase
   useEffect(() => {
     const fetchLogs = async () => {
       setIsLoading(true);
       try {
-        // In a real app, this would be an API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const mockLogs: NightLogSummary[] = [];
-        const today = new Date();
-        const temperaments = ['happy', 'fussy', 'gassy', 'calm', 'sick'];
-        const nurses = [
-          { id: 'nurse-1', name: 'Angela Davis' },
-          { id: 'nurse-2', name: 'Michael Chen' },
-          { id: 'nurse-3', name: 'Sophia Rodriguez' }
-        ];
-        const families = [
-          { id: 'family-1', name: 'Smith Family' },
-          { id: 'family-2', name: 'Johnson Family' },
-          { id: 'family-3', name: 'Williams Family' }
-        ];
-        
-        // Generate logs for the last 60 days
-        for (let i = 0; i < 60; i++) {
-          const date = new Date();
-          date.setDate(today.getDate() - i);
-          
-          const nurse = nurses[Math.floor(Math.random() * nurses.length)];
-          const family = families[Math.floor(Math.random() * families.length)];
-          
-          mockLogs.push({
-            id: `log-${i}`,
-            date: date.toISOString().split('T')[0],
-            nurseName: nurse.name,
-            nurseId: nurse.id,
-            familyName: family.name,
-            familyId: family.id,
-            shift: '8:00 PM - 6:00 AM',
-            temperament: temperaments[Math.floor(Math.random() * temperaments.length)],
-            sleepHours: `${7 + Math.floor(Math.random() * 3)}.${Math.floor(Math.random() * 10)} hours`,
-            feedings: 2 + Math.floor(Math.random() * 3),
-            diapers: 2 + Math.floor(Math.random() * 4)
-          });
-        }
-        
-        setLogs(mockLogs);
-        setFilteredLogs(mockLogs);
+        // TODO: Implement real API call to fetch night logs from Supabase
+        // For now, set empty array
+        setLogs([]);
+        setFilteredLogs([]);
       } catch (error) {
         console.error('Error fetching logs:', error);
       } finally {
@@ -806,15 +768,13 @@ const TextInput = ({ style, onChangeText, ...props }: any) => {
   );
 };
 
-const textInputStyles = StyleSheet.create({
+const pickerSelectStyles = StyleSheet.create({
   container: {
     flex: 1,
   },
   input: {
     fontSize: 16,
     color: COLORS.text,
-    outlineStyle: 'none',
-    border: 'none',
     backgroundColor: 'transparent',
     width: '100%',
   },

@@ -14,6 +14,9 @@ You are an expert in TypeScript, React Native, Expo, and Mobile UI development.
 - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
 - Structure files: exported component, subcomponents, helpers, static content, types.
 - Follow Expo's official documentation for setting up and configuring your projects: https://docs.expo.dev/
+Always write the code in English. 
+Always reply to me in Turkish.
+Before restarting an application, always check if an application is already running.
 
 ## Naming Conventions
 - Use lowercase with dashes for directories (e.g., components/auth-wizard).

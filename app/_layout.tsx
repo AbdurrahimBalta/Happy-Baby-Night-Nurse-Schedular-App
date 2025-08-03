@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/context/ThemeContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import DevelopmentModeButton from '@/components/DevelopmentModeButton';
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
@@ -39,6 +40,7 @@ export default function RootLayout() {
             <Stack.Screen name="admin" />
             <Stack.Screen name="+not-found" />
           </Stack>
+          <DevelopmentModeButton />
           <StatusBar style="auto" />
         </AuthProvider>
       </ThemeProvider>

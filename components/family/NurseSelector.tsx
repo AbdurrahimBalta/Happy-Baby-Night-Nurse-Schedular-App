@@ -3,45 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, ActivityIndi
 import { COLORS } from '@/constants/Colors';
 import { Star, Clock } from 'lucide-react-native';
 
-// Mock data for demonstration
-const MOCK_NURSES = [
-  {
-    id: '1',
-    name: 'Angela Davis',
-    picture: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-    bio: 'Experienced nurse with 10 years in neonatal care',
-    certifications: ['RN', 'CPR', 'Newborn Care Specialist'],
-    rating: 4.9,
-    availability: 'Available tonight'
-  },
-  {
-    id: '2',
-    name: 'Michael Chen',
-    picture: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=300',
-    bio: 'Pediatric nurse with special focus on infant care',
-    certifications: ['RN', 'CPR', 'Lactation Consultant'],
-    rating: 4.7,
-    availability: 'Available tomorrow'
-  },
-  {
-    id: '3',
-    name: 'Sophia Rodriguez',
-    picture: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=300',
-    bio: 'Specialized in twins and multiples care',
-    certifications: ['RN', 'Newborn Care Specialist'],
-    rating: 4.8,
-    availability: 'Available tonight'
-  },
-  {
-    id: '4',
-    name: 'James Wilson',
-    picture: 'https://images.pexels.com/photos/6749773/pexels-photo-6749773.jpeg?auto=compress&cs=tinysrgb&w=300',
-    bio: 'Night nurse with sleep training expertise',
-    certifications: ['RN', 'Sleep Consultant'],
-    rating: 4.6,
-    availability: 'Available in 2 days'
-  }
-];
+// TODO: Fetch nurses data from Supabase
 
 interface NurseSelectorProps {
   selectedNurseId: string | null;
@@ -53,9 +15,9 @@ const NurseSelector: React.FC<NurseSelectorProps> = ({ selectedNurseId, onSelect
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate API call
+    // TODO: Implement real API call to fetch available nurses
     setTimeout(() => {
-      setNurses(MOCK_NURSES);
+      setNurses([]);
       setLoading(false);
     }, 1000);
   }, []);

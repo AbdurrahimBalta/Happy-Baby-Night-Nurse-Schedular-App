@@ -46,77 +46,19 @@ export default function FamilyDetailsScreen() {
     }
   ]);
 
-  // Mock family data
+  // TODO: Fetch family data from Supabase
   const family = {
-    name: 'Smith Family',
-    address: '123 Main St, San Francisco, CA 94105',
+    name: 'Loading...',
+    address: '',
     preferences: {
-      preferredNurses: ['Angela D.', 'Michael C.'],
-      sleepTrainingMethod: 'Ferber Method',
-      feedingSchedule: 'Every 3 hours',
-      specialInstructions: 'White noise machine required, room temperature at 72°F'
+      preferredNurses: [],
+      sleepTrainingMethod: '',
+      feedingSchedule: '',
+      specialInstructions: ''
     },
-    babies: [
-      {
-        name: 'Emma',
-        age: '6 months',
-        allergies: 'None',
-        sleepSchedule: '7:30 PM - 6:30 AM'
-      },
-      {
-        name: 'Liam',
-        age: '6 months',
-        allergies: 'Dairy sensitivity',
-        sleepSchedule: '7:30 PM - 6:30 AM'
-      }
-    ],
-    requestedShifts: [
-      {
-        id: '1',
-        date: '2024-03-15',
-        time: '8:00 PM - 6:00 AM',
-        status: 'pending',
-        recurring: true,
-        frequency: 'Weekly on Mon, Wed, Fri'
-      },
-      {
-        id: '2',
-        date: '2024-03-16',
-        time: '9:00 PM - 7:00 AM',
-        status: 'approved',
-        recurring: false
-      }
-    ],
-    messages: [
-      {
-        id: 1,
-        sender: 'Admin',
-        text: 'Hi Mrs. Smith, your shift request for Friday has been approved.',
-        time: '2:30 PM',
-        isAdmin: true
-      },
-      {
-        id: 2,
-        sender: 'Sarah Smith',
-        text: 'Great, thank you! Quick question - can we adjust the start time to 8:30 PM?',
-        time: '2:45 PM',
-        isAdmin: false
-      },
-      {
-        id: 3,
-        sender: 'Admin',
-        text: "I'll check with the nurse and get back to you shortly.",
-        time: '2:47 PM',
-        isAdmin: true
-      },
-      {
-        id: 4,
-        sender: 'Sarah Smith',
-        text: 'Perfect, appreciate your help!',
-        time: '2:48 PM',
-        isAdmin: false
-      }
-    ]
+    babies: [],
+    requestedShifts: [],
+    messages: []
   };
 
   const handleApproveShift = (shiftId: string) => {

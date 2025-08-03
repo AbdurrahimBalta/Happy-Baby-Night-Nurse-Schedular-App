@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, ActivityIndicator, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ChevronLeft, Calendar, Clock, Search, Filter, Moon, Baby, Droplet, Smile, Frown, Wind, Heart, Thermometer, Plus, MapPin } from 'lucide-react-native';
@@ -30,47 +30,14 @@ export default function NurseNightLogsScreen() {
   const [selectedFamily, setSelectedFamily] = useState<string | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'completed' | 'pending'>('all');
 
-  // Generate mock data
   useEffect(() => {
     const fetchLogs = async () => {
       setIsLoading(true);
       try {
-        // In a real app, this would be an API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const mockLogs: NightLogSummary[] = [];
-        const today = new Date();
-        const temperaments = ['happy', 'fussy', 'gassy', 'calm', 'sick'];
-        const families = [
-          { id: 'family-1', name: 'Smith Family' },
-          { id: 'family-2', name: 'Johnson Family' },
-          { id: 'family-3', name: 'Williams Family' }
-        ];
-        
-        // Generate logs for the last 30 days
-        for (let i = 0; i < 30; i++) {
-          const date = new Date();
-          date.setDate(today.getDate() - i);
-          
-          const family = families[Math.floor(Math.random() * families.length)];
-          const isCompleted = i > 0; // Today's log is pending, past logs are completed
-          
-          mockLogs.push({
-            id: `log-${i}`,
-            date: date.toISOString().split('T')[0],
-            familyName: family.name,
-            familyId: family.id,
-            shift: '8:00 PM - 6:00 AM',
-            temperament: isCompleted ? temperaments[Math.floor(Math.random() * temperaments.length)] : '',
-            sleepHours: isCompleted ? `${7 + Math.floor(Math.random() * 3)}.${Math.floor(Math.random() * 10)} hours` : '',
-            feedings: isCompleted ? 2 + Math.floor(Math.random() * 3) : 0,
-            diapers: isCompleted ? 2 + Math.floor(Math.random() * 4) : 0,
-            isCompleted
-          });
-        }
-        
-        setLogs(mockLogs);
-        setFilteredLogs(mockLogs);
+        // TODO: Implement real API call to fetch night logs from Supabase
+        // For now, set empty array
+        setLogs([]);
+        setFilteredLogs([]);
       } catch (error) {
         console.error('Error fetching logs:', error);
       } finally {
@@ -843,28 +810,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// Add TextInput component
-const TextInput = ({ style, ...props }: any) => {
-  return (
-    <View style={[textInputStyles.container, style]}>
-      <input
-        style={textInputStyles.input}
-        {...props}
-      />
-    </View>
-  );
-};
-
-const textInputStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  input: {
-    fontSize: 16,
-    color: COLORS.text,
-    outlineStyle: 'none',
-    border: 'none',
-    backgroundColor: 'transparent',
-    width: '100%',
-  },
-});
+// Remove unused TextInput component - using React Native TextInput instead

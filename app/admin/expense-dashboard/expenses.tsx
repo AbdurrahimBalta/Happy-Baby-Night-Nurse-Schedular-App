@@ -30,54 +30,13 @@ export default function ExpensesScreen() {
     vendor: ''
   });
 
-  // Mock expense categories
+  // TODO: Fetch expense categories from Supabase
   const expenseCategories = [
     'Payroll', 'Insurance', 'Office', 'Marketing', 'Software', 'Travel', 'Legal', 'Other'
   ];
 
-  // Mock expense data
-  const [expenseEntries, setExpenseEntries] = useState<ExpenseEntry[]>([
-    {
-      id: '1',
-      date: '2024-03-01',
-      category: 'Payroll',
-      amount: 45000,
-      description: 'Monthly nurse payroll',
-      vendor: 'Payroll Service'
-    },
-    {
-      id: '2',
-      date: '2024-03-05',
-      category: 'Insurance',
-      amount: 2500,
-      description: 'Liability insurance premium',
-      vendor: 'Insurance Co.'
-    },
-    {
-      id: '3',
-      date: '2024-03-10',
-      category: 'Office',
-      amount: 1200,
-      description: 'Office rent',
-      vendor: 'Property Management'
-    },
-    {
-      id: '4',
-      date: '2024-03-15',
-      category: 'Marketing',
-      amount: 1500,
-      description: 'Social media advertising',
-      vendor: 'Facebook Ads'
-    },
-    {
-      id: '5',
-      date: '2024-03-20',
-      category: 'Software',
-      amount: 800,
-      description: 'Scheduling software subscription',
-      vendor: 'SaaS Provider'
-    }
-  ]);
+  // TODO: Fetch expense data from Supabase
+  const [expenseEntries, setExpenseEntries] = useState<ExpenseEntry[]>([]);
 
   const totalExpenses = expenseEntries.reduce((sum, entry) => sum + entry.amount, 0);
 

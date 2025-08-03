@@ -29,49 +29,8 @@ export default function RevenueScreen() {
     family: ''
   });
 
-  // Mock revenue data
-  const [revenueEntries, setRevenueEntries] = useState<RevenueEntry[]>([
-    {
-      id: '1',
-      date: '2024-03-01',
-      category: 'Sign-up Fee',
-      amount: 250,
-      description: 'New family registration',
-      family: 'Smith Family'
-    },
-    {
-      id: '2',
-      date: '2024-03-02',
-      category: 'Night Shift',
-      amount: 520,
-      description: 'Regular 10-hour shift',
-      family: 'Johnson Family'
-    },
-    {
-      id: '3',
-      date: '2024-03-03',
-      category: 'Night Shift',
-      amount: 560,
-      description: 'Weekend shift with twins',
-      family: 'Williams Family'
-    },
-    {
-      id: '4',
-      date: '2024-03-05',
-      category: 'Sign-up Fee',
-      amount: 250,
-      description: 'New family registration',
-      family: 'Brown Family'
-    },
-    {
-      id: '5',
-      date: '2024-03-07',
-      category: 'Night Shift',
-      amount: 520,
-      description: 'Regular 10-hour shift',
-      family: 'Smith Family'
-    }
-  ]);
+  // TODO: Fetch revenue data from Supabase
+  const [revenueEntries, setRevenueEntries] = useState<RevenueEntry[]>([]);
 
   const totalRevenue = revenueEntries.reduce((sum, entry) => sum + entry.amount, 0);
 

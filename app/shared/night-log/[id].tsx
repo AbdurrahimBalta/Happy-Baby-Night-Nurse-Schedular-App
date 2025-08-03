@@ -68,88 +68,25 @@ export default function NightLogScreen() {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  // Generate mock data for available dates (last 30 days)
+  // TODO: Fetch available dates from Supabase
   useEffect(() => {
-    const dates = [];
-    const today = new Date();
-    
-    for (let i = 0; i < 30; i++) {
-      const date = new Date();
-      date.setDate(today.getDate() - i);
-      dates.push(date.toISOString().split('T')[0]);
-    }
-    
-    setAvailableDates(dates);
-    setSelectedDate(dates[0]);
+    // TODO: Replace with real API call to get available log dates
+    setAvailableDates([]);
+    setSelectedDate(new Date().toISOString().split('T')[0]);
   }, []);
 
-  // Fetch night log data
+  // TODO: Fetch night log data from Supabase
   useEffect(() => {
     const fetchNightLog = async () => {
       setIsLoading(true);
       try {
-        // In a real app, this would be an API call
-        // For now, we'll simulate with mock data
+        // TODO: Implement real API call to fetch night log from Supabase
         await new Promise(resolve => setTimeout(resolve, 1000));
         
-        const mockLog: NightLog = {
-          id: id as string,
-          date: selectedDate || new Date().toISOString().split('T')[0],
-          nurseName: 'Angela Davis',
-          nurseId: 'nurse-1',
-          familyName: 'Smith Family',
-          familyId: 'family-1',
-          shift: '8:00 PM - 6:00 AM',
-          activities: [
-            {
-              id: '1',
-              time: '8:30 PM',
-              type: 'sleep',
-              description: 'Both babies put to sleep after bedtime routine'
-            },
-            {
-              id: '2',
-              time: '11:15 PM',
-              type: 'feeding',
-              description: 'Liam woke up for feeding - 4oz formula'
-            },
-            {
-              id: '3',
-              time: '11:30 PM',
-              type: 'diaper',
-              description: 'Changed Liam\'s diaper'
-            },
-            {
-              id: '4',
-              time: '2:30 AM',
-              type: 'feeding',
-              description: 'Emma woke up for feeding - 3.5oz formula'
-            },
-            {
-              id: '5',
-              time: '2:45 AM',
-              type: 'diaper',
-              description: 'Changed Emma\'s diaper'
-            },
-            {
-              id: '6',
-              time: '5:45 AM',
-              type: 'wake',
-              description: 'Both babies waking up, starting morning routine'
-            }
-          ],
-          summary: {
-            sleep: '8.5 hours average',
-            feedings: '2 per baby',
-            diapers: '2 per baby',
-            notes: 'Both babies slept well. Emma was a bit fussy during her 2:30 AM feeding but settled quickly after.',
-            temperament: 'happy'
-          }
-        };
-        
-        setNightLog(mockLog);
-        setEditedLog(mockLog);
-        setSelectedTemperament(mockLog.summary.temperament);
+        // For now, set empty data
+        setNightLog(null);
+        setEditedLog(null);
+        setSelectedTemperament('happy');
       } catch (error) {
         console.error('Error fetching night log:', error);
         Alert.alert('Error', 'Failed to load night log data');
