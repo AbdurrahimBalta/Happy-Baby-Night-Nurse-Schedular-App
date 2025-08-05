@@ -68,14 +68,8 @@ export default function AdminMessengerScreen() {
   const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const regions: Region[] = [
-    { id: 'all', name: 'All Regions', shortName: 'All', nurseCount: 45, color: COLORS.primary },
-    { id: 'northeast-fl', name: 'Northeast Florida', shortName: 'NE FL', nurseCount: 12, color: '#FF6B6B' },
-    { id: 'tampa', name: 'Tampa Bay', shortName: 'Tampa', nurseCount: 8, color: '#4ECDC4' },
-    { id: 'orlando', name: 'Orlando', shortName: 'Orlando', nurseCount: 10, color: '#45B7D1' },
-    { id: 'gainesville', name: 'Gainesville', shortName: 'GNV', nurseCount: 6, color: '#96CEB4' },
-    { id: 'miami', name: 'Miami-Dade', shortName: 'Miami', nurseCount: 9, color: '#FFEAA7' },
-  ];
+  // TODO: Fetch regions from Supabase
+  const regions: Region[] = [];
 
   // TODO: Fetch pinned messages from Supabase
   const [pinnedMessages, setPinnedMessages] = useState<Array<{id: string; sender: string; text: string; time: string; region: string; isPinned: boolean}>>([]);

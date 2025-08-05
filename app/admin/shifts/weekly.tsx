@@ -5,37 +5,20 @@ import { router } from 'expo-router';
 import { ChevronLeft, Clock, User } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 
+interface Shift {
+  time: string;
+  nurse: string;
+  family: string;
+}
+
+interface DayShifts {
+  id: string;
+  date: string;
+  shifts: Shift[];
+}
+
 export default function WeeklyShiftsScreen() {
-  const shifts = [
-    {
-      id: '1',
-      date: 'Monday, March 18',
-      shifts: [
-        {
-          time: '8:00 PM - 6:00 AM',
-          nurse: 'Angela Davis',
-          family: 'Smith Family'
-        },
-        {
-          time: '9:00 PM - 7:00 AM',
-          nurse: 'Michael Chen',
-          family: 'Johnson Family'
-        }
-      ]
-    },
-    {
-      id: '2',
-      date: 'Tuesday, March 19',
-      shifts: [
-        {
-          time: '8:00 PM - 6:00 AM',
-          nurse: 'Sophia Rodriguez',
-          family: 'Williams Family'
-        }
-      ]
-    },
-    // Add more days...
-  ];
+  const shifts: DayShifts[] = [];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,26 +34,33 @@ export default function WeeklyShiftsScreen() {
       </View>
 
       <ScrollView style={styles.content}>
-        {shifts.map((day) => (
-          <View key={day.id} style={styles.daySection}>
-            <Text style={styles.dayTitle}>{day.date}</Text>
-            {day.shifts.map((shift, index) => (
-              <View key={index} style={styles.shiftCard}>
-                <View style={styles.shiftTime}>
-                  <Clock size={16} color={COLORS.primary} />
-                  <Text style={styles.timeText}>{shift.time}</Text>
-                </View>
-                <View style={styles.shiftDetails}>
-                  <View style={styles.detailRow}>
-                    <User size={16} color={COLORS.primary} />
-                    <Text style={styles.detailText}>{shift.nurse}</Text>
-                  </View>
-                  <Text style={styles.familyText}>{shift.family}</Text>
-                </View>
-              </View>
-            ))}
+        {shifts.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyStateText}>No shifts scheduled</Text>
+            <Text style={styles.emptyStateSubtext}>Weekly shifts will appear here once scheduled</Text>
           </View>
-        ))}
+        ) : (
+          shifts.map((day) => (
+            <View key={day.id} style={styles.daySection}>
+              <Text style={styles.dayTitle}>{day.date}</Text>
+              {day.shifts.map((shift, index) => (
+                <View key={index} style={styles.shiftCard}>
+                  <View style={styles.shiftTime}>
+                    <Clock size={16} color={COLORS.primary} />
+                    <Text style={styles.timeText}>{shift.time}</Text>
+                  </View>
+                  <View style={styles.shiftDetails}>
+                    <View style={styles.detailRow}>
+                      <User size={16} color={COLORS.primary} />
+                      <Text style={styles.detailText}>{shift.nurse}</Text>
+                    </View>
+                    <Text style={styles.familyText}>{shift.family}</Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -158,5 +148,21 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     fontSize: 14,
     color: COLORS.textSecondary,
+  },
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 64,
+  },
+  emptyStateText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.textSecondary,
+    marginBottom: 8,
+  },
+  emptyStateSubtext: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
   },
 });

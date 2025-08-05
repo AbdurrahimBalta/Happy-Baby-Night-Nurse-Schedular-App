@@ -44,142 +44,19 @@ export default function ManageShiftsScreen() {
   const [duplicateInterval, setDuplicateInterval] = useState<'daily' | 'weekly' | 'monthly'>('weekly');
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Family color assignments
-  const familyColors: FamilyColor[] = [
-    { familyName: 'Smith Family', color: '#FF6B6B' },
-    { familyName: 'Johnson Family', color: '#4ECDC4' },
-    { familyName: 'Williams Family', color: '#45B7D1' },
-    { familyName: 'Brown Family', color: '#96CEB4' },
-    { familyName: 'Davis Family', color: '#FFEAA7' },
-    { familyName: 'Miller Family', color: '#DDA0DD' },
-    { familyName: 'Wilson Family', color: '#98D8C8' },
-    { familyName: 'Moore Family', color: '#F7DC6F' },
-    { familyName: 'Taylor Family', color: '#BB8FCE' },
-    { familyName: 'Anderson Family', color: '#85C1E9' },
-  ];
+  // TODO: Fetch family colors from Supabase
+  const familyColors: FamilyColor[] = [];
 
   const getFamilyColor = (familyName: string): string => {
     const familyColor = familyColors.find(fc => fc.familyName === familyName);
     return familyColor ? familyColor.color : '#95A5A6'; // Default gray color
   };
 
-  const availableNurses: Nurse[] = [
-    {
-      id: '1',
-      name: 'Angela Davis',
-      availability: 'Available tonight',
-      rating: 4.9
-    },
-    {
-      id: '2',
-      name: 'Michael Chen',
-      availability: 'Available tomorrow',
-      rating: 4.8
-    },
-    {
-      id: '3',
-      name: 'Sophia Rodriguez',
-      availability: 'Available tonight',
-      rating: 4.9
-    },
-    {
-      id: '4',
-      name: 'James Wilson',
-      availability: 'Available in 2 days',
-      rating: 4.7
-    }
-  ];
+  // TODO: Fetch available nurses from Supabase
+  const availableNurses: Nurse[] = [];
 
-  const [shifts, setShifts] = useState<Shift[]>([
-    {
-      id: '1',
-      familyName: 'Smith Family',
-      nurseName: 'Angela Davis',
-      date: 'Tonight',
-      time: '8:00 PM - 6:00 AM',
-      location: 'San Francisco, CA',
-      status: 'covered',
-      recurring: true,
-      fullDate: new Date()
-    },
-    {
-      id: '2',
-      familyName: 'Johnson Family',
-      nurseName: null,
-      date: 'Tomorrow',
-      time: '9:00 PM - 7:00 AM',
-      location: 'Palo Alto, CA',
-      status: 'uncovered',
-      recurring: false,
-      fullDate: new Date(Date.now() + 86400000)
-    },
-    {
-      id: '3',
-      familyName: 'Williams Family',
-      nurseName: 'Michael Chen',
-      date: 'March 20',
-      time: '8:30 PM - 6:30 AM',
-      location: 'San Jose, CA',
-      status: 'pending',
-      recurring: true,
-      fullDate: new Date(2024, 2, 20)
-    },
-    {
-      id: '4',
-      familyName: 'Brown Family',
-      nurseName: null,
-      date: 'March 21',
-      time: '9:00 PM - 7:00 AM',
-      location: 'Mountain View, CA',
-      status: 'uncovered',
-      recurring: false,
-      fullDate: new Date(2024, 2, 21)
-    },
-    {
-      id: '5',
-      familyName: 'Davis Family',
-      nurseName: 'Sophia Rodriguez',
-      date: 'March 22',
-      time: '8:00 PM - 6:00 AM',
-      location: 'Fremont, CA',
-      status: 'covered',
-      recurring: false,
-      fullDate: new Date(2024, 2, 22)
-    },
-    {
-      id: '6',
-      familyName: 'Miller Family',
-      nurseName: null,
-      date: 'March 23',
-      time: '9:30 PM - 7:30 AM',
-      location: 'Oakland, CA',
-      status: 'uncovered',
-      recurring: true,
-      fullDate: new Date(2024, 2, 23)
-    },
-    {
-      id: '7',
-      familyName: 'Wilson Family',
-      nurseName: 'James Wilson',
-      date: 'March 24',
-      time: '8:00 PM - 6:00 AM',
-      location: 'Berkeley, CA',
-      status: 'covered',
-      recurring: false,
-      fullDate: new Date(2024, 2, 24)
-    },
-    {
-      id: '8',
-      familyName: 'Smith Family',
-      nurseName: null,
-      date: 'March 25',
-      time: '8:00 PM - 6:00 AM',
-      location: 'San Francisco, CA',
-      status: 'pending',
-      recurring: true,
-      fullDate: new Date(2024, 2, 25)
-    }
-  ]);
+  // TODO: Fetch shifts data from Supabase
+  const [shifts, setShifts] = useState<Shift[]>([]);
 
   const filteredShifts = shifts.filter(shift => {
     if (selectedFilter === 'all') return true;
@@ -273,24 +150,12 @@ export default function ManageShiftsScreen() {
   };
 
   const handleCreateNewShift = () => {
-    const newShift: Shift = {
-      id: Date.now().toString(),
-      familyName: 'Taylor Family',
-      nurseName: null,
-      date: 'March 26',
-      time: '8:00 PM - 6:00 AM',
-      location: 'San Francisco, CA',
-      status: 'uncovered',
-      recurring: false,
-      fullDate: new Date(2024, 2, 26)
-    };
-
-    setShifts(prevShifts => [...prevShifts, newShift]);
+    // TODO: Implement real shift creation with form data
     setShowCreateModal(false);
     
     Alert.alert(
-      'Shift Created',
-      'New shift has been created successfully. You can now assign a nurse to cover it.',
+      'Feature Coming Soon',
+      'Shift creation will be implemented with real data integration.',
       [{ text: 'OK' }]
     );
   };
@@ -422,9 +287,9 @@ export default function ManageShiftsScreen() {
             onPress={() => setViewMode(viewMode === 'list' ? 'calendar' : 'list')}
           >
             {viewMode === 'list' ? (
-              <Calendar size={20} color={viewMode === 'calendar' ? COLORS.white : COLORS.primary} />
+              <Calendar size={20} color={COLORS.primary} />
             ) : (
-              <Grid3X3 size={20} color={viewMode === 'list' ? COLORS.white : COLORS.primary} />
+              <Grid3X3 size={20} color={COLORS.primary} />
             )}
           </TouchableOpacity>
           <TouchableOpacity 

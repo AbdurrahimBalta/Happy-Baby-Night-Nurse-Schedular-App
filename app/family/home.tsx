@@ -25,7 +25,7 @@ export default function FamilyHomeScreen() {
   const handleNotificationPress = () => {
     Alert.alert(
       'Notifications',
-      'You have 3 new notifications:\n\n• Shift confirmed for tonight\n• New message from Angela\n• Payment processed successfully',
+      'No new notifications',
       [{ text: 'OK' }]
     );
   };
@@ -140,9 +140,7 @@ export default function FamilyHomeScreen() {
             onPress={handleNotificationPress}
           >
             <Bell size={24} color={COLORS.text} />
-            <View style={styles.notificationBadge}>
-              <Text style={styles.badgeText}>3</Text>
-            </View>
+            {/* Notification badge will be shown when there are notifications */}
           </TouchableOpacity>
         </View>
 
@@ -162,17 +160,17 @@ export default function FamilyHomeScreen() {
           </View>
           <View style={styles.statsContainer}>
             <View style={styles.statItem}>
-              <Text style={styles.statValue}>6.5h</Text>
+              <Text style={styles.statValue}>--</Text>
               <Text style={styles.statLabel}>Total Sleep</Text>
             </View>
             <View style={styles.divider} />
             <View style={styles.statItem}>
-              <Text style={styles.statValue}>3</Text>
+              <Text style={styles.statValue}>--</Text>
               <Text style={styles.statLabel}>Feedings</Text>
             </View>
             <View style={styles.divider} />
             <View style={styles.statItem}>
-              <Text style={styles.statValue}>4</Text>
+              <Text style={styles.statValue}>--</Text>
               <Text style={styles.statLabel}>Diapers</Text>
             </View>
           </View>

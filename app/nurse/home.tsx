@@ -106,51 +106,58 @@ export default function NurseHomeScreen() {
               <Text style={styles.updateAvailabilityText}>Update Availability</Text>
             </TouchableOpacity>
           </View>
-          {upcomingShifts.map((shift) => (
-            <TouchableOpacity 
-              key={shift.id}
-              style={styles.shiftCard}
-              onPress={() => router.push(`/nurse/family/${shift.id}`)}
-            >
-              <View style={styles.shiftHeader}>
-                <Text style={styles.familyName}>{shift.family}</Text>
-                <View style={[
-                  styles.statusBadge,
-                  shift.status === 'confirmed' ? styles.confirmedBadge : styles.pendingBadge
-                ]}>
-                  <Text style={[
-                    styles.statusText,
-                    shift.status === 'confirmed' ? styles.confirmedText : styles.pendingText
+          {upcomingShifts.length === 0 ? (
+            <View style={styles.emptyStateContainer}>
+              <Text style={styles.emptyStateText}>No upcoming shifts</Text>
+              <Text style={styles.emptyStateSubtext}>Check back later for new assignments</Text>
+            </View>
+          ) : (
+            upcomingShifts.map((shift) => (
+              <TouchableOpacity 
+                key={shift.id}
+                style={styles.shiftCard}
+                onPress={() => router.push(`/nurse/family/${shift.id}`)}
+              >
+                <View style={styles.shiftHeader}>
+                  <Text style={styles.familyName}>{shift.family}</Text>
+                  <View style={[
+                    styles.statusBadge,
+                    shift.status === 'confirmed' ? styles.confirmedBadge : styles.pendingBadge
                   ]}>
-                    {shift.status.charAt(0).toUpperCase() + shift.status.slice(1)}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.shiftDetail}>
-                <Calendar size={16} color={COLORS.primary} />
-                <Text style={styles.shiftText}>{shift.date}</Text>
-              </View>
-
-              <View style={styles.shiftDetail}>
-                <Clock size={16} color={COLORS.primary} />
-                <Text style={styles.shiftText}>{shift.time}</Text>
-              </View>
-
-              <View style={styles.shiftDetail}>
-                <MapPin size={16} color={COLORS.primary} />
-                <Text style={styles.shiftText}>{shift.location}</Text>
-              </View>
-
-              <View style={styles.babiesContainer}>
-                {upcomingShifts.length > 0 && upcomingShifts[0].babies?.map((baby: string, index: number) => (
-                  <View key={index} style={styles.babyBadge}>
-                    <Text style={styles.babyText}>{baby}</Text>
+                    <Text style={[
+                      styles.statusText,
+                      shift.status === 'confirmed' ? styles.confirmedText : styles.pendingText
+                    ]}>
+                      {shift.status.charAt(0).toUpperCase() + shift.status.slice(1)}
+                    </Text>
                   </View>
-                )) || null}
-              </View>
-            </TouchableOpacity>
-          ))}
+                </View>
+
+                <View style={styles.shiftDetail}>
+                  <Calendar size={16} color={COLORS.primary} />
+                  <Text style={styles.shiftText}>{shift.date}</Text>
+                </View>
+
+                <View style={styles.shiftDetail}>
+                  <Clock size={16} color={COLORS.primary} />
+                  <Text style={styles.shiftText}>{shift.time}</Text>
+                </View>
+
+                <View style={styles.shiftDetail}>
+                  <MapPin size={16} color={COLORS.primary} />
+                  <Text style={styles.shiftText}>{shift.location}</Text>
+                </View>
+
+                <View style={styles.babiesContainer}>
+                  {shift.babies?.map((baby: string, index: number) => (
+                    <View key={index} style={styles.babyBadge}>
+                      <Text style={styles.babyText}>{baby}</Text>
+                    </View>
+                  )) || null}
+                </View>
+              </TouchableOpacity>
+            ))
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -375,5 +382,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: COLORS.primary,
     fontWeight: '500',
+  },
+  emptyStateContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 32,
+  },
+  emptyStateText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.textSecondary,
+    marginBottom: 8,
+  },
+  emptyStateSubtext: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
   },
 });

@@ -38,12 +38,8 @@ interface PayPeriod {
 }
 
 export default function ManagePayrollScreen() {
-  const [currentPayPeriod, setCurrentPayPeriod] = useState<PayPeriod>({
-    id: '1',
-    startDate: '2024-03-01',
-    endDate: '2024-03-14',
-    isActive: true
-  });
+  // TODO: Fetch current pay period from Supabase
+  const [currentPayPeriod, setCurrentPayPeriod] = useState<PayPeriod | null>(null);
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPayPeriodModal, setShowPayPeriodModal] = useState(false);
@@ -51,124 +47,10 @@ export default function ManagePayrollScreen() {
   const [selectedNurse, setSelectedNurse] = useState<Nurse | null>(null);
   const [editedNurse, setEditedNurse] = useState<Nurse | null>(null);
   const [newRegionName, setNewRegionName] = useState('');
-  const [editedPayPeriod, setEditedPayPeriod] = useState<PayPeriod>(currentPayPeriod);
+  const [editedPayPeriod, setEditedPayPeriod] = useState<PayPeriod | null>(currentPayPeriod);
 
-  const [regions, setRegions] = useState<Region[]>([
-    {
-      id: 'northeast-fl',
-      name: 'Northeast Florida',
-      nurses: [
-        {
-          id: '1',
-          name: 'Angela Davis',
-          region: 'northeast-fl',
-          hoursWorked: 80,
-          hourlyRate: 52,
-          weekendHours: 20,
-          holidayHours: 0,
-          twinsHours: 30,
-          weekendTwinsHours: 10,
-          totalPay: 4940,
-          startDate: '2023-01-15',
-          insurancePaid: true,
-          backgroundCheckPaid: true,
-          isActive: true
-        },
-        {
-          id: '2',
-          name: 'Sophia Rodriguez',
-          region: 'northeast-fl',
-          hoursWorked: 72,
-          hourlyRate: 50,
-          weekendHours: 16,
-          holidayHours: 8,
-          twinsHours: 24,
-          weekendTwinsHours: 8,
-          totalPay: 4416,
-          startDate: '2023-03-20',
-          insurancePaid: true,
-          backgroundCheckPaid: true,
-          isActive: true
-        },
-        {
-          id: '3',
-          name: 'James Wilson',
-          region: 'northeast-fl',
-          hoursWorked: 64,
-          hourlyRate: 48,
-          weekendHours: 12,
-          holidayHours: 0,
-          twinsHours: 20,
-          weekendTwinsHours: 6,
-          totalPay: 3648,
-          startDate: '2023-06-10',
-          insurancePaid: false,
-          backgroundCheckPaid: true,
-          isActive: true
-        }
-      ]
-    },
-    {
-      id: 'tampa',
-      name: 'Tampa Bay',
-      nurses: [
-        {
-          id: '4',
-          name: 'Michael Chen',
-          region: 'tampa',
-          hoursWorked: 76,
-          hourlyRate: 51,
-          weekendHours: 18,
-          holidayHours: 0,
-          twinsHours: 28,
-          weekendTwinsHours: 12,
-          totalPay: 4636,
-          startDate: '2023-02-28',
-          insurancePaid: true,
-          backgroundCheckPaid: true,
-          isActive: true
-        },
-        {
-          id: '5',
-          name: 'Jessica Martinez',
-          region: 'tampa',
-          hoursWorked: 68,
-          hourlyRate: 49,
-          weekendHours: 14,
-          holidayHours: 4,
-          twinsHours: 22,
-          weekendTwinsHours: 6,
-          totalPay: 3948,
-          startDate: '2023-04-12',
-          insurancePaid: true,
-          backgroundCheckPaid: false,
-          isActive: true
-        }
-      ]
-    },
-    {
-      id: 'orlando',
-      name: 'Orlando',
-      nurses: [
-        {
-          id: '6',
-          name: 'David Thompson',
-          region: 'orlando',
-          hoursWorked: 70,
-          hourlyRate: 50,
-          weekendHours: 16,
-          holidayHours: 0,
-          twinsHours: 26,
-          weekendTwinsHours: 8,
-          totalPay: 4200,
-          startDate: '2023-05-08',
-          insurancePaid: true,
-          backgroundCheckPaid: true,
-          isActive: true
-        }
-      ]
-    }
-  ]);
+  // TODO: Fetch regions and nurse data from Supabase
+  const [regions, setRegions] = useState<Region[]>([]);
 
   const calculateTotalPay = (nurse: Nurse): number => {
     const regularHours = nurse.hoursWorked - nurse.weekendHours - nurse.holidayHours;
@@ -393,7 +275,7 @@ export default function ManagePayrollScreen() {
             <ChevronRight size={20} color={COLORS.textSecondary} />
           </View>
           <Text style={styles.payPeriodDates}>
-            {new Date(currentPayPeriod.startDate).toLocaleDateString()} - {new Date(currentPayPeriod.endDate).toLocaleDateString()}
+            {currentPayPeriod ? `${new Date(currentPayPeriod.startDate).toLocaleDateString()} - ${new Date(currentPayPeriod.endDate).toLocaleDateString()}` : 'No pay period selected'}
           </Text>
           <Text style={styles.totalPayroll}>Total Payroll: ${totalPayroll.toLocaleString()}</Text>
         </TouchableOpacity>
@@ -584,15 +466,15 @@ export default function ManagePayrollScreen() {
             <View style={styles.modalBody}>
               <CustomInput
                 label="Start Date"
-                value={editedPayPeriod.startDate}
-                onChangeText={(text) => setEditedPayPeriod(prev => ({...prev, startDate: text}))}
+                value={editedPayPeriod?.startDate || ''}
+                onChangeText={(text) => setEditedPayPeriod(prev => prev ? {...prev, startDate: text} : null)}
                 placeholder="YYYY-MM-DD"
               />
               
               <CustomInput
                 label="End Date"
-                value={editedPayPeriod.endDate}
-                onChangeText={(text) => setEditedPayPeriod(prev => ({...prev, endDate: text}))}
+                value={editedPayPeriod?.endDate || ''}
+                onChangeText={(text) => setEditedPayPeriod(prev => prev ? {...prev, endDate: text} : null)}
                 placeholder="YYYY-MM-DD"
               />
             </View>

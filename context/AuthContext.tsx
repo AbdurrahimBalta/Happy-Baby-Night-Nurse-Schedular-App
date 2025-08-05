@@ -61,7 +61,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
   useEffect(() => {
     const checkSession = async () => {
       try {
-        // In a real app, check for stored credentials
+        // TODO: Implement real session checking with Supabase
+        // For now, just set loading to false to show development mode
         setIsLoading(false);
       } catch (error) {
         console.error('Error checking session:', error);
@@ -110,15 +111,14 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
   const signInAsRole = async (role: 'family' | 'nurse' | 'admin') => {
     setIsLoading(true);
     try {
-      // Create a mock user for development testing
-      const mockUser: User = {
+      const developmentUser: User = {
         id: `dev-${role}-${Date.now()}`,
         email: `dev-${role}@example.com`,
         role: role,
         isFirstLogin: false
       };
       
-      setUser(mockUser);
+      setUser(developmentUser);
       
       // Small delay to simulate network request
       await new Promise(resolve => setTimeout(resolve, 500));

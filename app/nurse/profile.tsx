@@ -9,12 +9,12 @@ import CustomButton from '@/components/common/CustomButton';
 export default function NurseProfileScreen() {
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
-    name: 'Angela Davis',
-    email: 'angela.davis@example.com',
-    phone: '(415) 555-0123',
-    bio: 'Experienced nurse with 10+ years in neonatal care. Specialized in sleep training and newborn development.',
-    certifications: ['RN', 'CPR', 'Newborn Care Specialist', 'Sleep Training Certified'],
-    picture: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300'
+    name: '',
+    email: '',
+    phone: '',
+    bio: '',
+    certifications: [] as string[],
+    picture: ''
   });
 
   const handleSave = () => {

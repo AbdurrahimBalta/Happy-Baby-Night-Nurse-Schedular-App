@@ -18,35 +18,8 @@ export default function MessagesScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedConversation, setSelectedConversation] = useState<string | null>(null);
 
-  const conversations: Conversation[] = [
-    {
-      id: '1',
-      name: 'Angela Davis',
-      avatar: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-      lastMessage: 'I\'ll be there at 8 PM tonight. Looking forward to seeing Emma and Liam!',
-      timestamp: '2:30 PM',
-      unreadCount: 0,
-      isOnline: true
-    },
-    {
-      id: '2',
-      name: 'Happy Baby Support',
-      avatar: 'https://images.pexels.com/photos/3995919/pexels-photo-3995919.jpeg?auto=compress&cs=tinysrgb&w=300',
-      lastMessage: 'Your shift for tomorrow has been confirmed. Angela will arrive at 8:00 PM.',
-      timestamp: '1:45 PM',
-      unreadCount: 1,
-      isOnline: true
-    },
-    {
-      id: '3',
-      name: 'Michael Chen',
-      avatar: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=300',
-      lastMessage: 'Thank you for the feedback! I\'m glad the sleep training is working well.',
-      timestamp: 'Yesterday',
-      unreadCount: 0,
-      isOnline: false
-    }
-  ];
+  const conversations: Conversation[] = [];
+  // TODO: Fetch conversations from Supabase
 
   const filteredConversations = conversations.filter(conv =>
     conv.name.toLowerCase().includes(searchQuery.toLowerCase())

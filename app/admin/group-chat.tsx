@@ -8,44 +8,22 @@ import { COLORS } from '@/constants/Colors';
 export default function GroupChatScreen() {
   const [message, setMessage] = useState('');
 
-  const pinnedMessages = [
-    {
-      id: 'p1',
-      sender: 'Admin',
-      text: '🎉 Welcome to our newest nurse, Michael Chen! He\'ll be starting next week.',
-      time: '2 days ago'
-    },
-    {
-      id: 'p2',
-      sender: 'Admin',
-      text: '📢 Remember to submit your timesheets by Sunday evening.',
-      time: '1 day ago'
-    }
-  ];
+  const pinnedMessages: Array<{
+    id: string;
+    sender: string;
+    text: string;
+    time: string;
+  }> = [];
+  // TODO: Fetch pinned messages from Supabase
 
-  const messages = [
-    {
-      id: 1,
-      sender: 'Angela Davis',
-      avatar: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: 'Good evening everyone! Just wanted to share that I had a great experience with the Johnson twins tonight.',
-      time: '8:30 PM'
-    },
-    {
-      id: 2,
-      sender: 'Sophia Rodriguez',
-      avatar: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: "That's wonderful! They're such sweet babies.",
-      time: '8:32 PM'
-    },
-    {
-      id: 3,
-      sender: 'Michael Chen',
-      avatar: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: 'Looking forward to meeting everyone next week!',
-      time: '8:35 PM'
-    }
-  ];
+  const messages: Array<{
+    id: number;
+    sender: string;
+    avatar: string;
+    text: string;
+    time: string;
+  }> = [];
+  // TODO: Fetch group chat messages from Supabase
 
   const handleSend = () => {
     if (message.trim()) {

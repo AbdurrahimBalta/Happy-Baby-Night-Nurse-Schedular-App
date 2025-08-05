@@ -5,79 +5,54 @@ import { router } from 'expo-router';
 import { ChevronLeft, Star, Clock, MessageSquare } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 
-const activeNurses = [
-  {
-    id: '1',
-    name: 'Angela Davis',
-    picture: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-    rating: 4.9,
-    currentFamily: 'Smith Family',
-    shiftTime: '8:00 PM - 6:00 AM',
-    certifications: ['RN', 'CPR', 'Sleep Training'],
-    workingDays: ['Mon', 'Wed', 'Fri'],
-    nextShifts: [
-      'Tonight 8:00 PM',
-      'Wed Mar 20 8:00 PM',
-      'Fri Mar 22 8:00 PM'
-    ]
-  },
-  {
-    id: '2',
-    name: 'Michael Chen',
-    picture: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=300',
-    rating: 4.8,
-    currentFamily: 'Johnson Family',
-    shiftTime: '9:00 PM - 7:00 AM',
-    certifications: ['RN', 'IBCLC'],
-    workingDays: ['Tue', 'Thu', 'Sat'],
-    nextShifts: [
-      'Tomorrow 9:00 PM',
-      'Thu Mar 21 9:00 PM',
-      'Sat Mar 23 9:00 PM'
-    ]
-  }
-];
+interface ActiveNurse {
+  id: string;
+  name: string;
+  picture: string;
+  rating: number;
+  currentFamily: string;
+  shiftTime: string;
+  certifications: string[];
+  workingDays: string[];
+  nextShifts: string[];
+}
 
-const availableNurses = [
-  {
-    id: '3',
-    name: 'Sophia Rodriguez',
-    picture: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=300',
-    rating: 4.9,
-    availability: 'Available Tonight',
-    preferredHours: '8:00 PM - 6:00 AM',
-    certifications: ['RN', 'NCS', 'CPR']
-  },
-  {
-    id: '4',
-    name: 'James Wilson',
-    picture: 'https://images.pexels.com/photos/6749773/pexels-photo-6749773.jpeg?auto=compress&cs=tinysrgb&w=300',
-    rating: 4.7,
-    availability: 'Available Tomorrow',
-    preferredHours: '9:00 PM - 7:00 AM',
-    certifications: ['RN', 'Sleep Consultant']
-  }
-];
+interface AvailableNurse {
+  id: string;
+  name: string;
+  picture: string;
+  rating: number;
+  availability: string;
+  preferredHours: string;
+  certifications: string[];
+}
 
-const uncoveredShifts = [
-  {
-    id: 'shift1',
-    family: 'Williams Family',
-    date: 'Tonight',
-    time: '8:00 PM - 6:00 AM',
-    recurring: true,
-    frequency: 'Mon, Wed, Fri'
-  },
-  {
-    id: 'shift2',
-    family: 'Brown Family',
-    date: 'Tomorrow',
-    time: '9:00 PM - 7:00 AM',
-    recurring: false
-  }
-];
+interface UncoveredShift {
+  id: string;
+  family: string;
+  date: string;
+  time: string;
+  recurring: boolean;
+  frequency?: string;
+}
 
-const AssignmentModal = ({ visible, onClose, nurse, shifts }) => {
+interface AssignmentModalProps {
+  visible: boolean;
+  onClose: () => void;
+  nurse: AvailableNurse;
+  shifts: UncoveredShift[];
+}
+
+// TODO: Fetch active nurses from Supabase
+const activeNurses: ActiveNurse[] = [];
+
+// TODO: Fetch available nurses from Supabase
+const availableNurses: AvailableNurse[] = [];
+
+// TODO: Fetch uncovered shifts from Supabase
+const uncoveredShifts: UncoveredShift[] = [];
+
+const AssignmentModal = ({ visible, onClose, nurse, shifts }: AssignmentModalProps) => {
   if (!visible) return null;
 
   return (
@@ -96,7 +71,7 @@ const AssignmentModal = ({ visible, onClose, nurse, shifts }) => {
             }}
           >
             <View>
-              <Text style={styles.familyName}>{shift.family}</Text>
+              <Text style={styles.shiftFamilyName}>{shift.family}</Text>
               <Text style={styles.shiftDetails}>
                 {shift.date} • {shift.time}
               </Text>
@@ -121,7 +96,7 @@ const AssignmentModal = ({ visible, onClose, nurse, shifts }) => {
 };
 
 export default function NursesScreen() {
-  const [selectedNurse, setSelectedNurse] = useState(null);
+  const [selectedNurse, setSelectedNurse] = useState<AvailableNurse | null>(null);
   const [showAssignmentModal, setShowAssignmentModal] = useState(false);
 
   return (
@@ -252,12 +227,14 @@ export default function NursesScreen() {
         </View>
       </ScrollView>
 
-      <AssignmentModal
-        visible={showAssignmentModal}
-        onClose={() => setShowAssignmentModal(false)}
-        nurse={selectedNurse}
-        shifts={uncoveredShifts}
-      />
+      {selectedNurse && (
+        <AssignmentModal
+          visible={showAssignmentModal}
+          onClose={() => setShowAssignmentModal(false)}
+          nurse={selectedNurse}
+          shifts={uncoveredShifts}
+        />
+      )}
     </SafeAreaView>
   );
 }
@@ -477,6 +454,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: COLORS.backgroundSecondary,
     marginBottom: 12,
+  },
+  shiftFamilyName: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.text,
   },
   shiftDetails: {
     fontSize: 14,

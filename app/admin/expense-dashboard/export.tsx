@@ -14,34 +14,21 @@ interface ExportOption {
   icon: React.ReactNode;
 }
 
+interface ExportHistoryItem {
+  id: string;
+  title: string;
+  date: string;
+  format: 'csv' | 'pdf' | 'excel';
+  size: string;
+}
+
 export default function ExportScreen() {
   const [selectedYear, setSelectedYear] = useState('2024');
   const [selectedMonth, setSelectedMonth] = useState('all');
   const [selectedFormat, setSelectedFormat] = useState<'csv' | 'pdf' | 'excel'>('csv');
   const [isExporting, setIsExporting] = useState(false);
-  const [exportHistory, setExportHistory] = useState([
-    {
-      id: '1',
-      title: 'Revenue Report - March 2024',
-      date: '2024-03-15',
-      format: 'csv',
-      size: '245 KB'
-    },
-    {
-      id: '2',
-      title: 'Expense Report - February 2024',
-      date: '2024-03-01',
-      format: 'pdf',
-      size: '1.2 MB'
-    },
-    {
-      id: '3',
-      title: 'Profit & Loss - Q1 2024',
-      date: '2024-04-01',
-      format: 'excel',
-      size: '780 KB'
-    }
-  ]);
+  // TODO: Fetch export history from Supabase
+  const [exportHistory, setExportHistory] = useState<ExportHistoryItem[]>([]);
 
   const years = ['2024', '2023', '2022'];
   const months = [

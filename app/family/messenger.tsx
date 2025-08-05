@@ -112,18 +112,7 @@ export default function MessengerScreen() {
         );
       }, 2000);
 
-      // Simulate admin response
-      setTimeout(() => {
-        const adminResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          text: 'Thanks for your message! We\'ll get back to you shortly.',
-          sender: 'admin',
-          timestamp: new Date(),
-          status: 'sent',
-          type: 'text'
-        };
-        setMessages(prev => [...prev, adminResponse]);
-      }, 3000);
+      // TODO: Send message to Supabase and handle real-time responses
     }
   };
 

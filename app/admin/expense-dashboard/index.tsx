@@ -6,7 +6,21 @@ import { ChevronLeft, DollarSign, TrendingUp, FileText, ChartBar as BarChart } f
 import { COLORS } from '@/constants/Colors';
 
 // TODO: Fetch financial data from Supabase
-const EMPTY_FINANCIAL_DATA = {
+interface MonthlyData {
+  month: string;
+  expenses: number;
+  profit: number;
+  revenue: number;
+}
+
+interface FinancialData {
+  grossRevenue: number;
+  expenses: number;
+  profit: number;
+  monthlyData: MonthlyData[];
+}
+
+const EMPTY_FINANCIAL_DATA: FinancialData = {
   grossRevenue: 0,
   expenses: 0,
   profit: 0,
@@ -159,46 +173,9 @@ export default function ExpenseDashboardScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Revenue Breakdown</Text>
+          {/* TODO: Replace with real Supabase data */}
           <View style={styles.breakdownContainer}>
-            <View style={styles.breakdownItem}>
-              <Text style={styles.breakdownLabel}>Sign-up Fees</Text>
-              <Text style={styles.breakdownValue}>{formatCurrency(25000)}</Text>
-              <View style={styles.progressBar}>
-                <View 
-                  style={[
-                    styles.progressFill, 
-                    { width: '20%', backgroundColor: COLORS.primary }
-                  ]}
-                />
-              </View>
-              <Text style={styles.breakdownPercent}>20%</Text>
-            </View>
-            <View style={styles.breakdownItem}>
-              <Text style={styles.breakdownLabel}>Night Shifts</Text>
-              <Text style={styles.breakdownValue}>{formatCurrency(87500)}</Text>
-              <View style={styles.progressBar}>
-                <View 
-                  style={[
-                    styles.progressFill, 
-                    { width: '70%', backgroundColor: COLORS.primary }
-                  ]}
-                />
-              </View>
-              <Text style={styles.breakdownPercent}>70%</Text>
-            </View>
-            <View style={styles.breakdownItem}>
-              <Text style={styles.breakdownLabel}>Service Fees</Text>
-              <Text style={styles.breakdownValue}>{formatCurrency(12500)}</Text>
-              <View style={styles.progressBar}>
-                <View 
-                  style={[
-                    styles.progressFill, 
-                    { width: '10%', backgroundColor: COLORS.primary }
-                  ]}
-                />
-              </View>
-              <Text style={styles.breakdownPercent}>10%</Text>
-            </View>
+            <Text style={styles.noDataText}>No revenue data available</Text>
           </View>
         </View>
       </ScrollView>
@@ -424,5 +401,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: COLORS.textSecondary,
     textAlign: 'right',
+  },
+  noDataText: {
+    fontSize: 16,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
+    padding: 20,
   },
 });

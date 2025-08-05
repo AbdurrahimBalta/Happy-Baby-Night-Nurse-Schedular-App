@@ -755,6 +755,22 @@ const styles = StyleSheet.create({
   },
 });
 
+// TextInput styles
+const textInputStyles = StyleSheet.create({
+  container: {
+    backgroundColor: COLORS.backgroundSecondary,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  input: {
+    fontSize: 16,
+    color: COLORS.text,
+    backgroundColor: 'transparent',
+    width: '100%',
+  },
+});
+
 // Add TextInput component
 const TextInput = ({ style, onChangeText, ...props }: any) => {
   return (

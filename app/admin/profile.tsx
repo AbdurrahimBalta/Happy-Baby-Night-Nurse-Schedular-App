@@ -29,18 +29,19 @@ export default function AdminProfileScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   
+  // TODO: Fetch admin profile from Supabase
   const [profile, setProfile] = useState<AdminProfile>({
-    id: user?.id || '1',
-    name: 'Administrator',
-    email: user?.email || 'admin@happybabynurses.com',
-    phone: '(904) 203-4430',
-    title: 'Operations Manager',
-    department: 'Administration',
-    location: 'Jacksonville, FL',
-    startDate: '2023-01-15',
-    bio: 'Dedicated to providing exceptional night nursing services for families. Passionate about supporting both our nursing team and the families we serve.',
+    id: user?.id || '',
+    name: '',
+    email: user?.email || '',
+    phone: '',
+    title: '',
+    department: '',
+    location: '',
+    startDate: '',
+    bio: '',
     profilePicture: null,
-    permissions: ['Manage Nurses', 'Manage Families', 'View Reports', 'System Settings']
+    permissions: []
   });
 
   const [editedProfile, setEditedProfile] = useState<AdminProfile>(profile);

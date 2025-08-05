@@ -16,49 +16,91 @@ interface UploadedFile {
   uri?: string;
 }
 
+interface Baby {
+  name: string;
+  age: string;
+  sleepSchedule: string;
+  allergies: string;
+}
+
+interface Shift {
+  id: string;
+  date: string;
+  time: string;
+  status: 'pending' | 'approved' | 'declined';
+  recurring: boolean;
+  frequency?: string;
+}
+
+interface Message {
+  id: string;
+  text: string;
+  timestamp: Date;
+  time: string;
+  isAdmin: boolean;
+  sender: string;
+}
+
+interface FamilyPreferences {
+  preferredNurses: string[];
+  sleepTrainingMethod: string;
+  feedingSchedule: string;
+  specialInstructions: string;
+}
+
+interface Family {
+  name: string;
+  address: string;
+  preferences: FamilyPreferences;
+  babies: Baby[];
+  requestedShifts: Shift[];
+  messages: Message[];
+}
+
 export default function FamilyDetailsScreen() {
   const { id } = useLocalSearchParams();
   const [message, setMessage] = useState('');
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([
-    {
-      id: '1',
-      name: 'Smith Family Intake Form.pdf',
-      type: 'application/pdf',
-      size: 245760, // 240 KB
-      uploadDate: new Date(Date.now() - 86400000), // 1 day ago
-      uploadedBy: 'Admin (Katelynn)'
-    },
-    {
-      id: '2',
-      name: 'Emergency Contacts.docx',
-      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      size: 32768, // 32 KB
-      uploadDate: new Date(Date.now() - 172800000), // 2 days ago
-      uploadedBy: 'Admin (Katelynn)'
-    },
-    {
-      id: '3',
-      name: 'Baby Schedule and Preferences.pdf',
-      type: 'application/pdf',
-      size: 156672, // 153 KB
-      uploadDate: new Date(Date.now() - 259200000), // 3 days ago
-      uploadedBy: 'Admin (Katelynn)'
-    }
-  ]);
+  // TODO: Replace with real uploaded files from Supabase
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
   // TODO: Fetch family data from Supabase
-  const family = {
-    name: 'Loading...',
-    address: '',
+  const family: Family = {
+    name: 'Johnson Family',
+    address: '123 Main Street, Anytown, USA',
     preferences: {
-      preferredNurses: [],
-      sleepTrainingMethod: '',
-      feedingSchedule: '',
-      specialInstructions: ''
+      preferredNurses: ['Sarah Wilson', 'Emily Davis'],
+      sleepTrainingMethod: 'Gentle sleep training',
+      feedingSchedule: 'Every 3 hours',
+      specialInstructions: 'Baby prefers white noise for sleeping'
     },
-    babies: [],
-    requestedShifts: [],
-    messages: []
+    babies: [
+      {
+        name: 'Emma',
+        age: '6 months',
+        sleepSchedule: '7 PM - 7 AM',
+        allergies: 'None known'
+      }
+    ],
+    requestedShifts: [
+      {
+        id: '1',
+        date: 'March 15, 2024',
+        time: '10:00 PM - 6:00 AM',
+        status: 'pending',
+        recurring: true,
+        frequency: 'Weekly on Fridays'
+      }
+    ],
+    messages: [
+       {
+         id: '1',
+         text: 'Hello, we need a nurse for tonight. Emma has been fussy lately.',
+         timestamp: new Date(),
+         time: '2:30 PM',
+         isAdmin: false,
+         sender: 'Mrs. Johnson'
+       }
+     ]
   };
 
   const handleApproveShift = (shiftId: string) => {
@@ -188,7 +230,7 @@ export default function FamilyDetailsScreen() {
         <Text style={styles.headerTitle}>{family.name}</Text>
         <TouchableOpacity 
           style={styles.messageButton}
-          onPress={() => router.push('/admin/messages')}
+          onPress={() => router.push('/admin/messenger')}
         >
           <MessageSquare size={24} color={COLORS.primary} />
         </TouchableOpacity>

@@ -28,105 +28,21 @@ export default function GroupChatScreen() {
   const [showUnread, setShowUnread] = useState(false);
 
   const regions: Region[] = [
-    { id: 'all', name: 'All Regions', shortName: 'All', nurseCount: 45, color: COLORS.primary },
-    { id: 'northeast-fl', name: 'Northeast Florida', shortName: 'NE FL', nurseCount: 12, color: '#FF6B6B' },
-    { id: 'tampa', name: 'Tampa Bay', shortName: 'Tampa', nurseCount: 8, color: '#4ECDC4' },
-    { id: 'orlando', name: 'Orlando', shortName: 'Orlando', nurseCount: 10, color: '#45B7D1' },
-    { id: 'gainesville', name: 'Gainesville', shortName: 'GNV', nurseCount: 6, color: '#96CEB4' },
-    { id: 'miami', name: 'Miami-Dade', shortName: 'Miami', nurseCount: 9, color: '#FFEAA7' },
+    { id: 'all', name: 'All Regions', shortName: 'All', nurseCount: 0, color: COLORS.primary }
   ];
+  // TODO: Fetch regions from Supabase
 
-  const pinnedMessages = [
-    {
-      id: 'p1',
-      sender: 'Admin',
-      text: '🎉 Welcome to our newest nurse, Michael Chen! He\'ll be starting in the Tampa region next week.',
-      time: '2 days ago',
-      region: 'tampa'
-    },
-    {
-      id: 'p2',
-      sender: 'Admin',
-      text: '📢 Remember to submit your timesheets by Sunday evening.',
-      time: '1 day ago',
-      region: 'all'
-    }
-  ];
+  const pinnedMessages: Array<{
+    id: string;
+    sender: string;
+    text: string;
+    time: string;
+    region: string;
+  }> = [];
+  // TODO: Fetch pinned messages from Supabase
 
-  const messages: Message[] = [
-    {
-      id: '1',
-      sender: 'Angela Davis',
-      avatar: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: 'Good evening everyone! Just wanted to share that I had a great experience with the Johnson twins tonight in Jacksonville.',
-      time: '8:30 PM',
-      region: 'northeast-fl',
-      read: true
-    },
-    {
-      id: '2',
-      sender: 'Sophia Rodriguez',
-      avatar: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: "That's wonderful! The twins are such sweet babies. How's the new sleep routine working out?",
-      time: '8:32 PM',
-      region: 'northeast-fl',
-      read: false
-    },
-    {
-      id: '3',
-      sender: 'Michael Chen',
-      avatar: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: 'Looking forward to meeting everyone in Tampa next week! Any tips for the area?',
-      time: '8:35 PM',
-      region: 'tampa',
-      read: false
-    },
-    {
-      id: '4',
-      sender: 'Jessica Martinez',
-      avatar: 'https://images.pexels.com/photos/6749773/pexels-photo-6749773.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: 'Welcome Michael! Tampa families are wonderful. There\'s a great 24/7 pharmacy on Dale Mabry that\'s super helpful.',
-      time: '8:38 PM',
-      region: 'tampa',
-      read: false
-    },
-    {
-      id: '5',
-      sender: 'David Thompson',
-      avatar: 'https://images.pexels.com/photos/5327921/pexels-photo-5327921.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: 'Orlando team checking in! Had a successful night with the Williams family. Baby Emma is finally sleeping through the night! 🎉',
-      time: '8:40 PM',
-      region: 'orlando',
-      read: false
-    },
-    {
-      id: '6',
-      sender: 'Maria Gonzalez',
-      avatar: 'https://images.pexels.com/photos/5407205/pexels-photo-5407205.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: 'That\'s amazing David! Sleep training success stories always make my day. Miami team sending congratulations! 🌟',
-      time: '8:42 PM',
-      region: 'miami',
-      read: false
-    },
-    {
-      id: '7',
-      sender: 'Sarah Wilson',
-      avatar: 'https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: 'Gainesville here! Quick question - has anyone dealt with teething babies lately? Looking for some gentle techniques.',
-      time: '8:45 PM',
-      region: 'gainesville',
-      read: false
-    },
-    {
-      id: '8',
-      sender: 'Angela Davis',
-      avatar: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-      text: '@Sarah Frozen washcloths work great! Also, gentle gum massage with clean fingers. The families I work with in Jacksonville swear by it.',
-      time: '8:47 PM',
-      region: 'northeast-fl',
-      read: false
-    }
-  ];
+  const messages: Message[] = [];
+  // TODO: Fetch group chat messages from Supabase
 
   const getFilteredMessages = () => {
     let filtered = messages;

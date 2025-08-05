@@ -5,26 +5,17 @@ import { router } from 'expo-router';
 import { ChevronLeft, Clock, User, MapPin } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 
+interface TonightShift {
+  id: string;
+  time: string;
+  nurse: string;
+  family: string;
+  location: string;
+  status: string;
+}
+
 export default function TonightShiftsScreen() {
-  const shifts = [
-    {
-      id: '1',
-      time: '8:00 PM - 6:00 AM',
-      nurse: 'Angela Davis',
-      family: 'Smith Family',
-      location: '123 Main St, San Francisco',
-      status: 'Checked In'
-    },
-    {
-      id: '2',
-      time: '9:00 PM - 7:00 AM',
-      nurse: 'Michael Chen',
-      family: 'Johnson Family',
-      location: '456 Oak Ave, San Francisco',
-      status: 'Starting Soon'
-    },
-    // Add more shifts...
-  ];
+  const shifts: TonightShift[] = [];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -40,37 +31,44 @@ export default function TonightShiftsScreen() {
       </View>
 
       <ScrollView style={styles.content}>
-        {shifts.map((shift) => (
-          <View key={shift.id} style={styles.shiftCard}>
-            <View style={styles.shiftHeader}>
-              <View style={styles.timeContainer}>
-                <Clock size={16} color={COLORS.primary} />
-                <Text style={styles.timeText}>{shift.time}</Text>
-              </View>
-              <View style={[
-                styles.statusBadge,
-                shift.status === 'Checked In' ? styles.checkedInBadge : styles.pendingBadge
-              ]}>
-                <Text style={[
-                  styles.statusText,
-                  shift.status === 'Checked In' ? styles.checkedInText : styles.pendingText
-                ]}>{shift.status}</Text>
-              </View>
-            </View>
-
-            <View style={styles.shiftDetails}>
-              <View style={styles.detailRow}>
-                <User size={16} color={COLORS.primary} />
-                <Text style={styles.detailText}>{shift.nurse}</Text>
-              </View>
-              <Text style={styles.familyText}>{shift.family}</Text>
-              <View style={styles.detailRow}>
-                <MapPin size={16} color={COLORS.primary} />
-                <Text style={styles.locationText}>{shift.location}</Text>
-              </View>
-            </View>
+        {shifts.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyStateText}>No shifts tonight</Text>
+            <Text style={styles.emptyStateSubtext}>Tonight's shifts will appear here once scheduled</Text>
           </View>
-        ))}
+        ) : (
+          shifts.map((shift) => (
+            <View key={shift.id} style={styles.shiftCard}>
+              <View style={styles.shiftHeader}>
+                <View style={styles.timeContainer}>
+                  <Clock size={16} color={COLORS.primary} />
+                  <Text style={styles.timeText}>{shift.time}</Text>
+                </View>
+                <View style={[
+                  styles.statusBadge,
+                  shift.status === 'Checked In' ? styles.checkedInBadge : styles.pendingBadge
+                ]}>
+                  <Text style={[
+                    styles.statusText,
+                    shift.status === 'Checked In' ? styles.checkedInText : styles.pendingText
+                  ]}>{shift.status}</Text>
+                </View>
+              </View>
+
+              <View style={styles.shiftDetails}>
+                <View style={styles.detailRow}>
+                  <User size={16} color={COLORS.primary} />
+                  <Text style={styles.detailText}>{shift.nurse}</Text>
+                </View>
+                <Text style={styles.familyText}>{shift.family}</Text>
+                <View style={styles.detailRow}>
+                  <MapPin size={16} color={COLORS.primary} />
+                  <Text style={styles.locationText}>{shift.location}</Text>
+                </View>
+              </View>
+            </View>
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -181,5 +179,21 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 14,
     color: COLORS.textSecondary,
+  },
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 64,
+  },
+  emptyStateText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.textSecondary,
+    marginBottom: 8,
+  },
+  emptyStateSubtext: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
   },
 });

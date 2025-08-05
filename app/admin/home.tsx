@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { Users, Settings, ChevronRight, User, MessageSquare, Calendar, DollarSign, FileText, ChartBar as BarChart } from 'lucide-react-native';
+import { Users, Settings, ChevronRight, User, MessageSquare, Calendar, DollarSign, FileText } from 'lucide-react-native';
 import { COLORS } from '@/constants/Colors';
 import { useAuth } from '@/context/AuthContext';
 
@@ -44,12 +44,6 @@ export default function AdminHomeScreen() {
       route: '/admin/night-logs'
     },
     {
-      icon: <BarChart size={24} color={COLORS.primary} />, 
-      title: 'Expense Dashboard',
-      subtitle: 'Track revenue and expenses',
-      route: '/admin/expense-dashboard',
-    },
-    {
       icon: <User size={24} color={COLORS.primary} />,
       title: 'My Profile',
       subtitle: 'Manage admin profile',
@@ -80,20 +74,21 @@ export default function AdminHomeScreen() {
           </View>
         </View>
 
+        {/* TODO: Replace with real data from Supabase */}
         <View style={styles.statsContainer}>
           <TouchableOpacity 
             style={styles.statCard}
             onPress={() => router.push('/admin/shifts/weekly')}
           >
-            <Text style={styles.statValue}>24</Text>
+            <Text style={styles.statValue}>-</Text>
             <Text style={styles.statLabel}>Total Shifts</Text>
             <Text style={styles.statSubtext}>This Week</Text>
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.statCard}
-            onPress={() => router.push('/admin/urgent-messages')}
+            onPress={() => router.push('/admin/messenger')}
           >
-            <Text style={styles.statValue}>3</Text>
+            <Text style={styles.statValue}>-</Text>
             <Text style={styles.statLabel}>Urgent Messages</Text>
             <Text style={styles.statSubtext}>From Families</Text>
           </TouchableOpacity>
@@ -104,7 +99,7 @@ export default function AdminHomeScreen() {
             style={styles.statCard}
             onPress={() => router.push('/admin/shifts/uncovered')}
           >
-            <Text style={styles.statValue}>8</Text>
+            <Text style={styles.statValue}>-</Text>
             <Text style={styles.statLabel}>Shifts Needing Coverage</Text>
             <Text style={styles.statSubtext}>This Week</Text>
           </TouchableOpacity>
@@ -112,7 +107,7 @@ export default function AdminHomeScreen() {
             style={styles.statCard}
             onPress={() => router.push('/admin/shifts/tonight')}
           >
-            <Text style={styles.statValue}>5</Text>
+            <Text style={styles.statValue}>-</Text>
             <Text style={styles.statLabel}>Shifts Tonight</Text>
             <Text style={styles.statSubtext}>All Covered</Text>
           </TouchableOpacity>
@@ -123,7 +118,7 @@ export default function AdminHomeScreen() {
             <TouchableOpacity
               key={index}
               style={styles.menuItem}
-              onPress={() => router.push(item.route)}
+              onPress={() => router.push(item.route as any)}
             >
               <View style={styles.menuItemContent}>
                 <View style={styles.menuItemIcon}>

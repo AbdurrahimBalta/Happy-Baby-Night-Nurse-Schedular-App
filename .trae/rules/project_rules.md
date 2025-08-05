@@ -275,3 +275,5 @@ You are an expert in TypeScript, React Native, Expo, and Mobile UI development.
 - Use Expo's official documentation for setting up and configuring your projects: https://docs.expo.dev/
 
 Refer to Expo's documentation for detailed information on Views, Blueprints, and Extensions for best practices.
+
+önceliğimiz mobilde geliştirme yapma, npx expo start demeden önce mevcutta çalışan bir şey varmı kontrol et. 

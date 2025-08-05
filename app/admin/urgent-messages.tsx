@@ -21,50 +21,8 @@ interface UrgentMessage {
 }
 
 export default function UrgentMessagesScreen() {
-  const [messages, setMessages] = useState<UrgentMessage[]>([
-    {
-      id: '1',
-      familyName: 'Smith Family',
-      familyImage: 'https://images.pexels.com/photos/3995919/pexels-photo-3995919.jpeg?auto=compress&cs=tinysrgb&w=300',
-      message: 'URGENT: Our regular nurse Angela called in sick for tonight\'s shift (8 PM - 6 AM). We desperately need a replacement as we have no backup childcare. Please help!',
-      timestamp: new Date(Date.now() - 1800000), // 30 minutes ago
-      priority: 'critical',
-      status: 'unread',
-      category: 'shift_change',
-      contactInfo: {
-        phone: '(904) 555-0123',
-        email: 'sarah.smith@email.com'
-      }
-    },
-    {
-      id: '2',
-      familyName: 'Johnson Family',
-      familyImage: 'https://images.pexels.com/photos/3995902/pexels-photo-3995902.jpeg?auto=compress&cs=tinysrgb&w=300',
-      message: 'Emergency situation: Baby Oliver has been running a fever and we need our nurse to arrive 2 hours early tonight to help monitor his condition. Can someone please call us ASAP?',
-      timestamp: new Date(Date.now() - 3600000), // 1 hour ago
-      priority: 'urgent',
-      status: 'read',
-      category: 'emergency',
-      contactInfo: {
-        phone: '(904) 555-0456',
-        email: 'mike.johnson@email.com'
-      }
-    },
-    {
-      id: '3',
-      familyName: 'Williams Family',
-      familyImage: 'https://images.pexels.com/photos/3995911/pexels-photo-3995911.jpeg?auto=compress&cs=tinysrgb&w=300',
-      message: 'We had a concerning experience with last night\'s nurse. She arrived 45 minutes late without notice and seemed unprepared. We need to discuss this situation immediately.',
-      timestamp: new Date(Date.now() - 7200000), // 2 hours ago
-      priority: 'high',
-      status: 'unread',
-      category: 'complaint',
-      contactInfo: {
-        phone: '(904) 555-0789',
-        email: 'jennifer.williams@email.com'
-      }
-    }
-  ]);
+  // TODO: Fetch urgent messages from Supabase
+  const [messages, setMessages] = useState<UrgentMessage[]>([]);
 
   const formatTimeAgo = (date: Date) => {
     const now = new Date();

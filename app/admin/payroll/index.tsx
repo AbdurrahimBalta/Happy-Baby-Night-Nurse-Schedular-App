@@ -39,126 +39,11 @@ interface Region {
 }
 
 export default function PayrollScreen() {
-  const [currentPayPeriod, setCurrentPayPeriod] = useState<PayPeriod>({
-    id: '1',
-    startDate: new Date(2024, 2, 1), // March 1, 2024
-    endDate: new Date(2024, 2, 14), // March 14, 2024
-    status: 'current'
-  });
+  // TODO: Replace with real pay period data from Supabase
+  const [currentPayPeriod, setCurrentPayPeriod] = useState<PayPeriod | null>(null);
 
-  const [regions, setRegions] = useState<Region[]>([
-    {
-      id: 'northeast-fl',
-      name: 'Northeast Florida',
-      expanded: true,
-      nurses: [
-        {
-          id: '1',
-          name: 'Angela Davis',
-          picture: 'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300',
-          region: 'Northeast Florida',
-          totalHours: 84,
-          regularHours: 60,
-          weekendHours: 16,
-          holidayHours: 0,
-          twinsHours: 24,
-          twinsWeekendHours: 8,
-          baseRate: 28,
-          grossPay: 2688,
-          deductions: 155,
-          netPay: 2533,
-          insurancePaid: true,
-          backgroundCheckPaid: true
-        },
-        {
-          id: '2',
-          name: 'Sophia Rodriguez',
-          picture: 'https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=300',
-          region: 'Northeast Florida',
-          totalHours: 72,
-          regularHours: 56,
-          weekendHours: 16,
-          holidayHours: 0,
-          twinsHours: 16,
-          twinsWeekendHours: 0,
-          baseRate: 26,
-          grossPay: 2208,
-          deductions: 0,
-          netPay: 2208,
-          insurancePaid: false,
-          backgroundCheckPaid: true
-        }
-      ]
-    },
-    {
-      id: 'tampa',
-      name: 'Tampa Bay',
-      expanded: false,
-      nurses: [
-        {
-          id: '3',
-          name: 'Michael Chen',
-          picture: 'https://images.pexels.com/photos/5452201/pexels-photo-5452201.jpeg?auto=compress&cs=tinysrgb&w=300',
-          region: 'Tampa Bay',
-          totalHours: 80,
-          regularHours: 64,
-          weekendHours: 16,
-          holidayHours: 0,
-          twinsHours: 32,
-          twinsWeekendHours: 8,
-          baseRate: 30,
-          grossPay: 2880,
-          deductions: 155,
-          netPay: 2725,
-          insurancePaid: true,
-          backgroundCheckPaid: true
-        },
-        {
-          id: '4',
-          name: 'Jessica Martinez',
-          picture: 'https://images.pexels.com/photos/6749773/pexels-photo-6749773.jpeg?auto=compress&cs=tinysrgb&w=300',
-          region: 'Tampa Bay',
-          totalHours: 68,
-          regularHours: 52,
-          weekendHours: 16,
-          holidayHours: 0,
-          twinsHours: 20,
-          twinsWeekendHours: 4,
-          baseRate: 27,
-          grossPay: 2244,
-          deductions: 30,
-          netPay: 2214,
-          insurancePaid: true,
-          backgroundCheckPaid: false
-        }
-      ]
-    },
-    {
-      id: 'orlando',
-      name: 'Orlando',
-      expanded: false,
-      nurses: [
-        {
-          id: '5',
-          name: 'David Thompson',
-          picture: 'https://images.pexels.com/photos/5327921/pexels-photo-5327921.jpeg?auto=compress&cs=tinysrgb&w=300',
-          region: 'Orlando',
-          totalHours: 76,
-          regularHours: 60,
-          weekendHours: 16,
-          holidayHours: 0,
-          twinsHours: 28,
-          twinsWeekendHours: 12,
-          baseRate: 29,
-          grossPay: 2668,
-          deductions: 155,
-          netPay: 2513,
-          insurancePaid: true,
-          backgroundCheckPaid: true
-        }
-      ]
-    }
-  ]);
+  // TODO: Replace with real regions and nurse payroll data from Supabase
+  const [regions, setRegions] = useState<Region[]>([]);
 
   // Calculate totals for current pay period
   const allNurses = regions.flatMap(region => region.nurses);
@@ -210,7 +95,9 @@ export default function PayrollScreen() {
         },
         {
           text: 'Add',
-          onPress: (regionName) => {
+          onPress: () => {
+            // TODO: Implement region name input modal
+            const regionName = 'New Region'; // Placeholder
             if (regionName && regionName.trim()) {
               const newRegion: Region = {
                 id: `region-${Date.now()}`,
@@ -226,9 +113,7 @@ export default function PayrollScreen() {
         }
       ],
       {
-        cancelable: true,
-        prompt: true,
-        defaultValue: ''
+        cancelable: true
       }
     );
   };
@@ -307,7 +192,7 @@ export default function PayrollScreen() {
             <Text style={styles.payPeriodTitle}>Current Pay Period</Text>
           </View>
           <Text style={styles.payPeriodDates}>
-            {formatDate(currentPayPeriod.startDate)} - {formatDate(currentPayPeriod.endDate)}
+            {currentPayPeriod ? `${formatDate(currentPayPeriod.startDate)} - ${formatDate(currentPayPeriod.endDate)}` : 'No pay period selected'}
           </Text>
           <View style={styles.payPeriodStats}>
             <View style={styles.statItem}>

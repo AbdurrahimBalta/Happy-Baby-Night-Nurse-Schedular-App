@@ -6,40 +6,16 @@ import { ChevronLeft, Upload, Play, CircleCheck as CheckCircle } from 'lucide-re
 import { COLORS } from '@/constants/Colors';
 
 export default function TrainingsScreen() {
-  const [trainings] = useState([
-    {
-      id: '1',
-      title: 'Newborn Care Basics',
-      duration: '2 hours',
-      completed: true,
-      thumbnail: 'https://images.pexels.com/photos/3875225/pexels-photo-3875225.jpeg',
-      description: 'Learn the fundamentals of newborn care including feeding, bathing, and sleep schedules.'
-    },
-    {
-      id: '2',
-      title: 'Sleep Training Techniques',
-      duration: '1.5 hours',
-      completed: true,
-      thumbnail: 'https://images.pexels.com/photos/3875220/pexels-photo-3875220.jpeg',
-      description: 'Master various sleep training methods and learn how to help babies develop healthy sleep habits.'
-    },
-    {
-      id: '3',
-      title: 'Emergency Response',
-      duration: '3 hours',
-      completed: false,
-      thumbnail: 'https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg',
-      description: 'Essential emergency response procedures and first aid for infants and newborns.'
-    },
-    {
-      id: '4',
-      title: 'Developmental Milestones',
-      duration: '2.5 hours',
-      completed: false,
-      thumbnail: 'https://images.pexels.com/photos/3875227/pexels-photo-3875227.jpeg',
-      description: 'Understanding baby development stages and how to support healthy growth.'
-    }
-  ]);
+  interface Training {
+    id: string;
+    title: string;
+    duration: string;
+    completed: boolean;
+    thumbnail: string;
+    description: string;
+  }
+
+  const [trainings] = useState<Training[]>([]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -65,52 +41,59 @@ export default function TrainingsScreen() {
           <View style={styles.progressBar}>
             <View style={[styles.progressFill, { width: '50%' }]} />
           </View>
-          <Text style={styles.progressText}>2 of 4 trainings completed</Text>
+          <Text style={styles.progressText}>{trainings.filter(t => t.completed).length} of {trainings.length} trainings completed</Text>
         </View>
 
         <View style={styles.trainingsContainer}>
-          {trainings.map((training) => (
-            <TouchableOpacity 
-              key={training.id}
-              style={styles.trainingCard}
-              onPress={() => {}}
-            >
-              <Image 
-                source={{ uri: training.thumbnail }}
-                style={styles.thumbnail}
-              />
-              <View style={styles.trainingInfo}>
-                <View style={styles.trainingHeader}>
-                  <Text style={styles.trainingTitle}>{training.title}</Text>
-                  {training.completed && (
-                    <CheckCircle size={20} color={COLORS.success} />
-                  )}
-                </View>
-                <Text style={styles.trainingDescription}>
-                  {training.description}
-                </Text>
-                <View style={styles.trainingFooter}>
-                  <View style={styles.durationContainer}>
-                    <Play size={16} color={COLORS.primary} />
-                    <Text style={styles.durationText}>{training.duration}</Text>
+          {trainings.length === 0 ? (
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyStateText}>No trainings available</Text>
+              <Text style={styles.emptyStateSubtext}>Training materials will appear here when available</Text>
+            </View>
+          ) : (
+            trainings.map((training) => (
+              <TouchableOpacity 
+                key={training.id}
+                style={styles.trainingCard}
+                onPress={() => {}}
+              >
+                <Image 
+                  source={{ uri: training.thumbnail }}
+                  style={styles.thumbnail}
+                />
+                <View style={styles.trainingInfo}>
+                  <View style={styles.trainingHeader}>
+                    <Text style={styles.trainingTitle}>{training.title}</Text>
+                    {training.completed && (
+                      <CheckCircle size={20} color={COLORS.success} />
+                    )}
                   </View>
-                  <TouchableOpacity 
-                    style={[
-                      styles.startButton,
-                      training.completed && styles.completedButton
-                    ]}
-                  >
-                    <Text style={[
-                      styles.startButtonText,
-                      training.completed && styles.completedButtonText
-                    ]}>
-                      {training.completed ? 'Review' : 'Start Training'}
-                    </Text>
-                  </TouchableOpacity>
+                  <Text style={styles.trainingDescription}>
+                    {training.description}
+                  </Text>
+                  <View style={styles.trainingFooter}>
+                    <View style={styles.durationContainer}>
+                      <Play size={16} color={COLORS.primary} />
+                      <Text style={styles.durationText}>{training.duration}</Text>
+                    </View>
+                    <TouchableOpacity 
+                      style={[
+                        styles.startButton,
+                        training.completed && styles.completedButton
+                      ]}
+                    >
+                      <Text style={[
+                        styles.startButtonText,
+                        training.completed && styles.completedButtonText
+                      ]}>
+                        {training.completed ? 'Review' : 'Start Training'}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          ))}
+              </TouchableOpacity>
+            ))
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -258,5 +241,28 @@ const styles = StyleSheet.create({
   },
   completedButtonText: {
     color: COLORS.primary,
+  },
+  emptyState: {
+    backgroundColor: COLORS.white,
+    borderRadius: 16,
+    padding: 32,
+    alignItems: 'center',
+    shadowColor: COLORS.shadow,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  emptyStateText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.text,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  emptyStateSubtext: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
   },
 });
