@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import DateTimePicker from '@/components/common/DateTimePicker';
@@ -39,12 +39,12 @@ export default function RequestShiftScreen() {
     setDate(newDate);
   };
   
-  const handleStartTimeChange = (newTime: number) => {
-    setStartTime(newTime);
+  const handleStartTimeChange = (newTime: Date) => {
+    setStartTime(newTime.getTime());
   };
   
-  const handleEndTimeChange = (newTime: number) => {
-    setEndTime(newTime);
+  const handleEndTimeChange = (newTime: Date) => {
+    setEndTime(newTime.getTime());
   };
   
   const toggleRecurring = () => {
@@ -121,7 +121,7 @@ export default function RequestShiftScreen() {
         </View>
       </View>
       
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <View style={styles.scrollContent}>
         {step === 1 && (
           <View style={styles.stepContainer}>
             <Text style={styles.stepTitle}>Select Date & Time</Text>
@@ -248,7 +248,7 @@ export default function RequestShiftScreen() {
             />
           </View>
         )}
-      </ScrollView>
+      </View>
       
       <View style={styles.footer}>
         {step > 1 && (
@@ -265,14 +265,14 @@ export default function RequestShiftScreen() {
           <CustomButton
             title="Next"
             onPress={handleNext}
-            style={[styles.actionButton, step > 1 ? styles.halfButton : {}]}
+            style={step > 1 ? StyleSheet.flatten([styles.actionButton, styles.halfButton]) : styles.actionButton}
           />
         ) : (
           <CustomButton
             title="Confirm Request"
             onPress={handleSubmit}
             isLoading={isLoading}
-            style={[styles.actionButton, styles.halfButton]}
+            style={StyleSheet.flatten([styles.actionButton, styles.halfButton])}
           />
         )}
       </View>
@@ -316,8 +316,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
   },
   scrollContent: {
+    flex: 1,
     padding: 16,
-    flexGrow: 1,
   },
   stepContainer: {
     flex: 1,
